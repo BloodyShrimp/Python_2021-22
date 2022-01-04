@@ -3,7 +3,7 @@ import generator
 import matplotlib.pyplot as plt
 import time
 
-iterations = [10**2, 10**3, 10**4, 10**5 // 2]
+iterations = [10**2, 10**3, 10**4, 10**5, 10**6]
 random_integers = []
 # almost_sorted_integers = []
 # reversed_almost_sorted_integers = []
@@ -44,8 +44,8 @@ for i in range(4):
                 sorting_algorithms.mergesort(numbers, 0, len(numbers) - 1)
             t1 = time.time()
             timing[len(numbers)] = t1 - t0
-        x, y = zip(*timing.items())
-        plt.plot(x, y, label=names_of_sorts[i], linestyle = 'dashed', marker = 'o', linewidth = 1)
+    x, y = zip(*timing.items())
+    plt.plot(x, y, label=names_of_sorts[i], linestyle = 'dashed', marker = 'o', linewidth = 1)
 
 plt.xscale('log')
 plt.xlabel("N")
@@ -53,4 +53,3 @@ plt.ylabel("Czas [s]")
 plt.legend()
 plt.title("Czas sortowania")
 plt.savefig("sort_time.png")
-plt.savefig("sort_time.svg")
