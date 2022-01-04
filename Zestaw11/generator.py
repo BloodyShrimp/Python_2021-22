@@ -25,11 +25,6 @@ def randomGauss(N):
     numbers = []
     for i in range(N):
         numbers.append(random.gauss(13, 2))
-    # plt.plot(numbers)
-    # plt.savefig('gaussNumbers.png')
-    # plt.clf()
-    # plt.hist(numbers, bins = 200)
-    # plt.savefig('gauss.png')
     return numbers
 
 def repeatedIntegers(N):

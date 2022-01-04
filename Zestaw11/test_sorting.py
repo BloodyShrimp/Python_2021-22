@@ -3,8 +3,7 @@ import generator
 import matplotlib.pyplot as plt
 import time
 
-iterations = [10**2, 10**3, 10**4, 10**5, 10**6]
-# iterations = [10**2, 10**3, 10**4]
+iterations = [10**2, 10**3, 10**4, 10**5 // 2]
 random_integers = []
 # almost_sorted_integers = []
 # reversed_almost_sorted_integers = []
