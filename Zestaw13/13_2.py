@@ -49,4 +49,4 @@ def checkFromTo(start, end):
     for i in range(start, end + 1):
         checkForSize(i)
 
-checkFromTo(6, 6)
+checkFromTo(4, 7)
