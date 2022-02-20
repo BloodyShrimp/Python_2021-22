@@ -68,14 +68,17 @@ def checkSolution(rozmiar, start_x, start_y):
     zapisz(1, start_x, start_y)
 
     if probuj(2, start_x, start_y):
-        print("Mamy rozwiązanie " + str((start_x, start_y)))
+        print("Mamy rozwiązanie " + str((start_x, start_y)) + "\n")
         rysuj()
     else:
-        print("Nie istnieje rozwiązanie " + str((start_x, start_y)))
+        print("Nie istnieje rozwiązanie " + str((start_x, start_y)) + "\n")
 
 def checkAllForBoard(rozmiar):
     for i in range(0, rozmiar):
         for j in range(0, rozmiar):
             checkSolution(rozmiar, i, j)
 
-checkAllForBoard(6)
+for i in range(3, 7):
+    print("Rozwiązania dla rozmiaru " + str(i) + "x" + str(i) + "\n")
+    checkAllForBoard(i)
+    print("========================================================\n\n")
