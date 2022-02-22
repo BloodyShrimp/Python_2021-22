@@ -44,7 +44,8 @@ class Block:
 
     def modify_block(self, new_data):
         """
-        modyfikuje dane bloku, normalnie zakazane jedynie w celach demonstracyjnych
+        modyfikuje dane bloku, normalnie zakazane jedynie w celach
+        demonstracyjnych
         """
         self.data = new_data
 
@@ -52,8 +53,11 @@ class Block:
         """
         konwersja bloku do ladnego stringa
         """
-        napis = "Data: {data}\nTimestamp: {timestamp}\nPrevious hash: {prev_hash}\nHash: {hash}".format(
-            data=self.data, timestamp=time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(self.timestamp)), prev_hash=self.previous_hash, hash=self.hash)
+        napis = "Data: {data}\nTimestamp: {timestamp}\nPrevious hash:\n"\
+            "{prev_hash}\nHash:\n{hash}".format(
+            data=self.data, timestamp=time.strftime('%Y-%m-%d %H:%M:%S',
+            time.localtime(self.timestamp)), prev_hash=self.previous_hash,
+            hash=self.hash)
 
         return napis
 
@@ -102,26 +106,27 @@ class Blockchain:
         elapsed = end_time - start_time
         self.mining_times.append(elapsed)
         self.chain.append(new_block)
-        print("=" * 30)
+        print("=" * 79)
         print("Block added (time spent on mining: " + str(elapsed) + " s)")
-        print("=" * 30)
+        print("=" * 79)
         print(new_block)
-        print("=" * 30)
+        print("=" * 79)
 
     def print_chain(self):
         """
         wypisuje caly blockchain na wyjscie standardowe
         """
         for i in range(len(self.chain)):
-            print("=" * 30)
+            print("=" * 79)
             print("Block nr: " + str(i))
-            print("=" * 30)
+            print("=" * 79)
             print(self.chain[i])
-            print("=" * 30)
+            print("=" * 79)
 
     def edit_block(self, index, new_data):
         """
-        edytuje dane bloku na podanym indeksie, normalnie zabronione, jedynie do demonstracji
+        edytuje dane bloku na podanym indeksie, normalnie zabronione, jedynie do
+        demonstracji
         """
         self.chain[index].modify_block(new_data)
 
@@ -133,34 +138,37 @@ class Blockchain:
 
     def is_chain_valid(self):
         """
-        skanuje caly blockchain i weryfikuje jego poprawnosc to jest:
-        1) czy bloki sa wykopane, czyli hashe zaczynaja sie od podanej liczby zer
-        2) czy hash kazdego bloku zgadza sie z previous hashem zawartym w kolejnym bloku
-        jesli znajdzie podejrzany blok to wypisuje jego zawartosc
+        skanuje caly blockchain i weryfikuje jego poprawnosc to jest: 1) czy
+        bloki sa wykopane, czyli hashe zaczynaja sie od podanej liczby zer 2)
+        czy hash kazdego bloku zgadza sie z previous hashem zawartym w kolejnym
+        bloku jesli znajdzie podejrzany blok to wypisuje jego zawartosc
         """
         for i in range(0, len(self.chain) - 1):
-            flag = (self.chain[i+1].previous_hash == self.chain[i].calculate_hash()
+            flag = (self.chain[i+1].previous_hash ==
+                    self.chain[i].calculate_hash()
                     ) and (self.chain[i].hash.startswith('0' * self.difficulty))
             if not flag:
                 if(self.chain[i].hash == self.chain[i].calculate_hash()):
-                    print("=" * 30)
+                    print("=" * 79)
                     print(
-                        "Chain is not valid found missing block at index: " + str(i + 1))
+                        "Chain is not valid found missing block at index: "
+                        + str(i + 1))
                     print("Adjacent blocks with missing block in between:")
-                    print("=" * 30)
+                    print("=" * 79)
                     print(self.chain[i])
-                    print("=" * 30)
+                    print("=" * 79)
                     print(self.chain[i+1])
-                    print("=" * 30)
+                    print("=" * 79)
                 else:
-                    print("=" * 30)
+                    print("=" * 79)
                     print(
-                        "Chain is not valid found modified block at index: " + str(i))
-                    print("=" * 30)
+                        "Chain is not valid found modified block at index: "
+                        + str(i))
+                    print("=" * 79)
                     print(self.chain[i])
                     print("Actual recalculated hash:\n" +
                           str(self.chain[i].calculate_hash()))
-                    print("=" * 30)
+                    print("=" * 79)
                 return
 
         print("Chain is valid.")
@@ -172,7 +180,8 @@ class Blockchain:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Demonstracja blockchainu.")
     parser.add_argument("difficulty", metavar='difficulty', type=int,
-                        help="Trudnosc blockchainu tzn. ilosc zer wymagana na poczatku kazdego hashu.")
+                        help="Trudnosc blockchainu tzn. ilosc zer wymagana na \
+                            poczatku kazdego hashu.")
     args = parser.parse_args()
 
     input_difficulty = args.difficulty
@@ -184,7 +193,8 @@ if __name__ == "__main__":
         command = input(
             "\nPodaj komende:\n"
             "    add <data> - dodaje blok\n"
-            "    fill <n> - dodaje n blokow o losowych danych (uwaga moze zajac duzo czasu)\n"
+            "    fill <n> - dodaje n blokow o losowych danych "\
+            "(uwaga moze zajac duzo czasu)\n"
             "    print - wyswietla blockchain\n"
             "    modify <index> <data> - edytuj dane w bloku\n"
             "    delete <index> - usun blok\n"
