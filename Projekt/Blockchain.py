@@ -54,10 +54,10 @@ class Block:
         konwersja bloku do ladnego stringa
         """
         napis = "Data: {data}\nTimestamp: {timestamp}\nPrevious hash:\n"\
-            "{prev_hash}\nHash:\n{hash}".format(
+            "{prev_hash}\nHash:\n{hash}\nNonce: {nonce}".format(
             data=self.data, timestamp=time.strftime('%Y-%m-%d %H:%M:%S',
             time.localtime(self.timestamp)), prev_hash=self.previous_hash,
-            hash=self.hash)
+            hash=self.hash, nonce=self.nonce)
 
         return napis
 
